@@ -3,6 +3,4 @@
 /.cache/
 /build/**
 !/build/tasks.ini
-!/build/Makefile
 !/build/ChatServer
-!/build/ChatClient_autogen
