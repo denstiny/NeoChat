@@ -1,0 +1,16 @@
+<RCC>
+  <qresource prefix="/">
+      <file>../../../resources/SideButtonEnter.png</file>
+      <file>../../../resources/SideButtonLeave.png</file>
+      <file>../../../resources/createGroup.png</file>
+      <file>../../../resources/contact-book.png</file>
+      <file>../../../resources/customerButton.png</file>
+      <file>../../../resources/callButton.png</file>
+      <file>../../../resources/collection.png</file>
+      <file>../../../resources/settings.png</file>
+      <file>../../../resources/night.png</file>
+      <file>../../../resources/arrowEnter.png</file>
+      <file>../../../resources/arrowLeave.png</file>
+      <file>../../../resources/down.png</file>
+  </qresource>
+</RCC>
