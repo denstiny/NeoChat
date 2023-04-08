@@ -11,7 +11,7 @@ add_definitions(-DCONFIGPATH="${CONFIGPATH}")
 find_package(PkgConfig)
 
 pkg_check_modules(mariadb REQUIRED IMPORTED_TARGET libmariadb)
-add_subdirectory(3rdpackages/B-tree)
+
 include_directories(src/modules)
 # add google btree source
 file(GLOB_RECURSE source_src src/*.cpp src/*.hpp)
