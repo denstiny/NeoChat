@@ -1,7 +1,7 @@
 #pragma once
 #include <QPushButton>
 #include <QDebug>
-#include "ui/ui_MainWindow.h"
+#include "ui_MainWindow.h"
 #include <QPalette>
 #include <QMouseEvent>
 #include "UserMenuWidget/UserMenuWidget.hpp"
