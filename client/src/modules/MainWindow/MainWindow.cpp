@@ -180,7 +180,7 @@ void MainWindow::AfterMath()  {
 QString MainWindow::GetLastLoginAccount()  {
   QVariant account =  userSetting->value ("account");
   if (account.isNull()) {
-    return QString::Null();
+    return QString();
   }
   return account.toString();
 }

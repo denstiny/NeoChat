@@ -1,7 +1,7 @@
 #pragma once
 #include <QWidget>
 #include <QDebug>
-#include "ui/ui_UserMenuWidget.h"
+#include "ui_UserMenuWidget.h"
 #include <QAbstractAnimation>
 #include <QPropertyAnimation>
 #include <QString>

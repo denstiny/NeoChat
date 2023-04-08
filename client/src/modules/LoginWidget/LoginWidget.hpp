@@ -1,11 +1,12 @@
 #pragma once
-#include <QWidget>
-#include <ui/ui_LoginWidget.h>
+
+#include "ui_LoginWidget.h"
 #include "User/User.hpp"
 #include "NetWork/NetWork.hpp"
 #include <QAbstractAnimation>
 #include <QPropertyAnimation>
 #include <QPoint>
+#include <QWidget>
 
 class LoginWidget: public QWidget {
     Q_OBJECT
