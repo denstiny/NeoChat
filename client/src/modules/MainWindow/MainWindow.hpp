@@ -22,6 +22,7 @@ class MainWindow: public QMainWindow {
     void LoadServerAccountInformation(); // 加载账号信息
     void AfterMath(); // 窗口关闭时做善后处理
     QString GetLastLoginAccount(); // 获取上次退出时登陆的账号
+    void SwitchChatChannel (QString Channel_id); // 切换聊天频道
   protected:
     bool eventFilter (QObject* object, QEvent* event);
     void resizeEvent (QResizeEvent* event);
