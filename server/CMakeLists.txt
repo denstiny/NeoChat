@@ -21,7 +21,7 @@ add_executable(${BINNAME} src/main.cpp ${source_src})
 target_link_libraries(${BINNAME}
   PkgConfig::mariadb
   cppbtree)
-
+add_subdirectory(test)
 # # run test task
 # add_executable(test_mysql test/test_mysql.cpp ${source_src})
 # target_link_libraries(test_mysql mysqlclient)

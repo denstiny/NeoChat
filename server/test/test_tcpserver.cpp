@@ -12,10 +12,16 @@
 #include <unistd.h>
 #include <arpa/inet.h>
 #include <cstring>
+#include <gtest/gtest.h>
 using namespace std;
 const char buf[] = "hello world\n\0";
 const char ip[] = "127.0.0.1";
 const int port = 6667;
+
+class Tst_Tcp: public testing::Test
+{
+
+};
 void test_server() {
   this_thread::sleep_for (std::chrono::milliseconds (200));
   struct sockaddr_in address;
@@ -31,11 +37,11 @@ void test_server() {
   }
 }
 
-int main (int argc, char** argv) {
+TEST_F(Tst_Tcp, TcpTest)
+{
   ThreadPool pool;
   pool.Init (10);
   for (int i = 0; i < 1000; i++) {
     pool.Submit (test_server);
   }
-  return 0;
 }
