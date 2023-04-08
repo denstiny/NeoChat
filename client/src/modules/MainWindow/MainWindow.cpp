@@ -12,6 +12,8 @@ MainWindow::MainWindow (QWidget* parent)
   installEventFilter (this);
   setWindowTitle ("Chat Client");
   setWindowFlags (Qt::Tool);
+  new_user_account = GetLastLoginAccount();
+  user[new_user_account] = User (*userSetting, new_user_account);
   InitNetWork();
   ui->statusbar->setStyleSheet ("color:#8C98A4");
 }
@@ -79,10 +81,21 @@ void MainWindow::InitNetWork()  {
 void MainWindow::NetWorkConnection (bool status)  {
   QString message[2] = {"连接服务器失败,请检查当前网络状况", "连接服务器成功: 正在验证用户是否有效..."};
   ui->statusbar->showMessage (message[status]);
+  if (not status) { return; }
+  // 没有找到登陆账号，直接发起登陆失败，显示登陆界面
+  if (new_user_account.isNull()) {
+    emit LoginStatusChanged (false);
+    return;
+  }
+  // 发起账号登陆
+  QString account = new_user_account;
+  QString password = user[new_user_account].user_password;
+  qDebug() << "account:" << account;
+  qDebug() << "password: " << password;
   network->SendMessage (QMap<QString, QString> {
     {"type", "POST"},
-    {"user_account", "102"},
-    {"user_password", "asd"},
+    {"user_account", account},
+    {"user_password", password},
     {"message_type", "login"}
   });
 }
@@ -95,11 +108,13 @@ void MainWindow::NetWorkMessagePressed ()  {
   if (ma["state"] == "200" and ma["message_type"] == "login") {
     ui->statusbar->showMessage ("登陆成功");
     // 保存新的账号信息
+    qDebug() << "successful: lgoin";
     use_user_account = new_user_account;
     user[new_user_account].Save (*this->userSetting);
     emit LoginStatusChanged (true);
   } else {
     ui->statusbar->showMessage ("登陆失败，准备重新登陆");
+    qDebug() << "failure: login";
     emit LoginStatusChanged (false);
   }
 }
@@ -160,4 +175,12 @@ void MainWindow::AfterMath()  {
   if (not use_user_account.isEmpty()) {
     userSetting->setValue ("account", use_user_account);
   }
+}
+
+QString MainWindow::GetLastLoginAccount()  {
+  QVariant account =  userSetting->value ("account");
+  if (account.isNull()) {
+    return QString::Null();
+  }
+  return account.toString();
 }

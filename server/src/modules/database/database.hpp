@@ -10,7 +10,9 @@ class DataSchema {
   public:
     DataSchema() {};
     DataSchema (ReConf& conf);
+    // connect mysql
     void Connect (ReConf& conf);
+    // query mysql
     MYSQL_RES* Query (std::string queryString);
     int CountQuery (MYSQL_RES*);
     ~DataSchema();

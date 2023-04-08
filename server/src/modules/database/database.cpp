@@ -54,6 +54,7 @@ void DataSchema::init_mysql()  {
   }
 }
 
+// 数据库查询修改操作
 MYSQL_RES* DataSchema::Query (std::string  queryString)  {
   /* free mysql result heap memory */
   if (resules != nullptr) {
@@ -70,6 +71,7 @@ MYSQL_RES* DataSchema::Query (std::string  queryString)  {
   return resules;
 }
 
+// 统计查询结构数量
 int DataSchema::CountQuery (MYSQL_RES* res)  {
   return mysql_num_rows (res);
 }

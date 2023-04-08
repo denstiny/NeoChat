@@ -13,7 +13,14 @@ enum class Sex {
   female, // 女性
   neutral, // 中性
 };
-static std::unordered_map<Sex, QString> SexValue {
+
+const static std::unordered_map<QString, Sex> SexValue {
+  {SEX_MALE, Sex::male},
+  {SEX_FEMALE, Sex::female},
+  {SEX_NEUTRAL, Sex::neutral},
+};
+
+const static std::unordered_map<Sex, QString> ValueSex {
   {Sex::male, SEX_MALE},
   {Sex::female, SEX_FEMALE},
   {Sex::neutral, SEX_NEUTRAL},
@@ -23,6 +30,8 @@ class User {
   public:
     void Save (QSettings& setting);
     void Load (QSettings& setting, QString account);
+    User();
+    User (QSettings& setting, QString account);
     // 账号
     QString user_account;
     // 头像

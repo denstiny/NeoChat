@@ -33,8 +33,11 @@ class Server {
   private:
     std::string ResultMessageString (int socket);
     void SmallMessageProcess (Map header, int sock);
+    // Processing login response
     std::string ResultLoginString (const Map header);
+    // Processing registration response
     std::string ResultRegisteredString (const Map header);
+    // Processing text response
     std::string ResultTextString (const Map header, int& client_sock);
   private:
     std::unordered_map<std::string, User> user_map; // 用户列表

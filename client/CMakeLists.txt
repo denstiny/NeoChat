@@ -9,7 +9,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 project(ChatClient CXX)
 
 # set ui file search path
-set(CMAKE_BUILD_TYPE debug)
+if(NOT CMAKE_BUILD_TYPE) 
+  set(CMAKE_BUILD_TYPE Debug)
+endif()
 set(CMAKE_AUTOUIC_SEARCH_PATHS "${CMAKE_SOURCE_DIR}/src/modules/ui/")
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)

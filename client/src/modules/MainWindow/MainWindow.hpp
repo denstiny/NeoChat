@@ -21,6 +21,7 @@ class MainWindow: public QMainWindow {
     void HideChildWidget (QWidget* widget); // 隐藏子窗口
     void LoadServerAccountInformation(); // 加载账号信息
     void AfterMath(); // 窗口关闭时做善后处理
+    QString GetLastLoginAccount(); // 获取上次退出时登陆的账号
   protected:
     bool eventFilter (QObject* object, QEvent* event);
     void resizeEvent (QResizeEvent* event);
