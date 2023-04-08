@@ -1,5 +1,4 @@
 #include "UserMenuWidget.hpp"
-
 UserMenuWidget::UserMenuWidget (QWidget* parent):
   QWidget (parent),
   ui (new Ui_UserMenuWidget), is_hide (false) {
@@ -77,7 +76,6 @@ void UserMenuWidget::InitMyEventSlot()  {
            &UserMenuWidget::contactButton_clicked);
 }
 
-
 // 通话
 void UserMenuWidget::cellButton_clicked()  {
   qDebug() << "UserMenuWidget::cellButton_clicked";
@@ -113,3 +111,10 @@ void UserMenuWidget::settingButton_clicked()  {
 void UserMenuWidget::nightButton_clicked()  {
   qDebug() << "UserMenuWidget::nightButton_clicked";
 }
+
+// TODO: 创建群组窗口
+// TODO: 创建设置窗口
+// TODO: 创建频道窗口
+// TODO: 创建联系人窗口 （已经生成ui文件
+// TODO: 创建通话窗口
+// TODO: 创建收藏窗口

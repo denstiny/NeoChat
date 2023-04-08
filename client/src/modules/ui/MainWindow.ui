@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>836</width>
-    <height>605</height>
+    <width>999</width>
+    <height>693</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -50,7 +50,7 @@ border-color: rgb(23, 33, 43);
             <x>0</x>
             <y>0</y>
             <width>282</width>
-            <height>457</height>
+            <height>545</height>
            </rect>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -99,11 +99,13 @@ border-color: rgb(23, 33, 43);
             </property>
             <property name="styleSheet">
              <string notr="true">QLabel:hover {
- 
-image: url(:/resources/SideButtonLeave.png);
+ image: url(:/resources/SideButtonEnter.png);
+
 }
 
-QLabel{image: url(:/resources/SideButtonEnter.png);}</string>
+QLabel{
+image: url(:/resources/SideButtonLeave.png);
+}</string>
             </property>
             <property name="text">
              <string/>
@@ -143,7 +145,7 @@ padding-left:10px;
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="label">
+     <widget class="QLabel" name="LeftSpaceLabel">
       <property name="minimumSize">
        <size>
         <width>0</width>
@@ -152,12 +154,12 @@ padding-left:10px;
       </property>
       <property name="maximumSize">
        <size>
-        <width>1</width>
+        <width>3</width>
         <height>16777215</height>
        </size>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: #101921;</string>
+       <string notr="true"/>
       </property>
       <property name="text">
        <string/>
@@ -165,7 +167,212 @@ padding-left:10px;
      </widget>
     </item>
     <item>
-     <widget class="QWidget" name="widget" native="true"/>
+     <widget class="QWidget" name="widget_3" native="true">
+      <property name="styleSheet">
+       <string notr="true">border:none;</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <property name="spacing">
+        <number>0</number>
+       </property>
+       <item row="0" column="0">
+        <widget class="QScrollArea" name="MessageWidgetScrollArea">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(14, 22, 33);
+</string>
+         </property>
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="scrollAreaWidgetContents_2">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>644</width>
+            <height>575</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QWidget" name="EditMessageWidget" native="true">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>54</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="spacing">
+           <number>16</number>
+          </property>
+          <property name="topMargin">
+           <number>11</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>86</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+image: url(:/resources/file_leave.png);
+}
+
+QPushButton:hover {
+	image: url(:/resources/file_enter.png);
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>33</height>
+             </size>
+            </property>
+            <property name="placeholderText">
+             <string>请输入消息....</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ExpressionButton">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	image: url(:/resources/expression_leave.png);
+}
+QPushButton:hover {
+	image: url(:/resources/expression_enter.png);
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="VoiceButton">
+            <property name="minimumSize">
+             <size>
+              <width>1</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	image: url(:/resources/voice_leave.png);
+}
+QPushButton:hover {
+	image: url(:/resources/voice_enter.png);
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="SendMessageButton">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	image: url(:/resources/send-message.png);
+}</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="RightSpaceLabel">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>3</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWidget" name="RightWidget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>3</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -174,7 +381,7 @@ padding-left:10px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>836</width>
+     <width>999</width>
      <height>25</height>
     </rect>
    </property>

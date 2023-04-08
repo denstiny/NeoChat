@@ -87,17 +87,10 @@ void MainWindow::NetWorkConnection (bool status)  {
     emit LoginStatusChanged (false);
     return;
   }
-  // 发起账号登陆
+  // 向服务器发起登陆
   QString account = new_user_account;
   QString password = user[new_user_account].user_password;
-  qDebug() << "account:" << account;
-  qDebug() << "password: " << password;
-  network->SendMessage (QMap<QString, QString> {
-    {"type", "POST"},
-    {"user_account", account},
-    {"user_password", password},
-    {"message_type", "login"}
-  });
+  Login (account, password);
 }
 
 // 有新的消息信号被触发,读取消息
@@ -138,6 +131,7 @@ void MainWindow::TriggerLoginChanged (bool status)  {
   }
 }
 
+// 显示子窗口
 void MainWindow::ShowChildWidget (QWidget* widget)  {
   if (is_show_widget != nullptr)
     is_show_widget->hide();
@@ -150,6 +144,7 @@ void MainWindow::LoadServerAccountInformation()  {
   ui->statusbar->showMessage ("正在加载用户数据...");
 }
 
+// 向服务器发起登陆请求
 void MainWindow::Login (QString user_account, QString user_password)  {
   network->SendMessage (QMap<QString, QString> {
     {"type", "POST"},
@@ -164,6 +159,7 @@ void MainWindow::Login (QString user_account, QString user_password)  {
   new_user_account =  user_account;
 }
 
+// 隐藏子窗口
 void MainWindow::HideChildWidget (QWidget* widget)  {
   if (is_show_widget != nullptr) {
     is_show_widget = nullptr;
@@ -171,12 +167,14 @@ void MainWindow::HideChildWidget (QWidget* widget)  {
   }
 }
 
+// 在程序关闭前,做的善后工作
 void MainWindow::AfterMath()  {
   if (not use_user_account.isEmpty()) {
     userSetting->setValue ("account", use_user_account);
   }
 }
 
+// 获取上次退出时登陆的账号
 QString MainWindow::GetLastLoginAccount()  {
   QVariant account =  userSetting->value ("account");
   if (account.isNull()) {
@@ -184,3 +182,9 @@ QString MainWindow::GetLastLoginAccount()  {
   }
   return account.toString();
 }
+
+// 切换聊天频道
+void MainWindow::SwitchChatChannel (QString Channel_id)  {
+
+}
+// TODO: 消息ui Demo未初始化

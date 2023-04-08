@@ -12,5 +12,12 @@
       <file>../../../resources/arrowEnter.png</file>
       <file>../../../resources/arrowLeave.png</file>
       <file>../../../resources/down.png</file>
+      <file>../../../resources/expression_enter.png</file>
+      <file>../../../resources/expression_leave.png</file>
+      <file>../../../resources/send-message.png</file>
+      <file>../../../resources/voice_enter.png</file>
+      <file>../../../resources/voice_leave.png</file>
+      <file>../../../resources/file_enter.png</file>
+      <file>../../../resources/file_leave.png</file>
   </qresource>
 </RCC>
