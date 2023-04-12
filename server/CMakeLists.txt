@@ -10,16 +10,18 @@ add_definitions(-DCONFIGPATH="${CONFIGPATH}")
 
 find_package(PkgConfig)
 
-pkg_check_modules(mariadb REQUIRED IMPORTED_TARGET libmariadb)
+pkg_check_modules(MYSQL REQUIRED IMPORTED_TARGET mysqlclient)
 
 include_directories(src/modules)
 # add google btree source
 file(GLOB_RECURSE source_src src/*.cpp src/*.hpp)
 list(REMOVE_ITEM source_src ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
-add_executable(${BINNAME} src/main.cpp ${source_src})
+include_directories(${MYSQL_INCLUDE_DIRS})
+link_directories(${MYSQL_LIBRARY_DIRS})
+add_executable(${BINNAME} src/main.cpp ${source_src} ${MYSQL_INCLUDE_DIRS})
 
 target_link_libraries(${BINNAME}
-  PkgConfig::mariadb
+  PkgConfig::mysqlclient
   cppbtree)
 
 # # run test task

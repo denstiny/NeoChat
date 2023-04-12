@@ -16,5 +16,5 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 
 add_subdirectory(3rdpackages/B-tree)
-add_subdirectory(client)
+#add_subdirectory(client)
 add_subdirectory(server)
