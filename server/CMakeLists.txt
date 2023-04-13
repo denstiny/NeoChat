@@ -6,6 +6,8 @@
 
 set(BINNAME neochatcxxserver)
 
+set(CONFIGPATH "${CMAKE_CURRENT_SOURCE_DIR}/config/server" CACHE STRING "confpath")
+message(${CONFIGPATH})
 add_definitions(-DCONFIGPATH="${CONFIGPATH}")
 
 find_package(PkgConfig)
@@ -18,10 +20,12 @@ file(GLOB_RECURSE source_src src/*.cpp src/*.hpp)
 list(REMOVE_ITEM source_src ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 include_directories(${MYSQL_INCLUDE_DIRS})
 link_directories(${MYSQL_LIBRARY_DIRS})
-add_executable(${BINNAME} src/main.cpp ${source_src} ${MYSQL_INCLUDE_DIRS})
+add_executable(${BINNAME} src/main.cpp ${source_src})
 
+target_include_directories(${BINNAME} PRIVATE ${MYSQL_INCLUDE_DIRS})
 target_link_libraries(${BINNAME}
-  PkgConfig::mysqlclient
+  #PkgConfig::mysqlclient
+  ${MYSQL_LIBRARIES}
   cppbtree)
 
 # # run test task

@@ -9,7 +9,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(CONFIGPATH "/etc/neochat/default.conf" CACHE STRING "confpath")
 
 if (NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug)
@@ -18,3 +17,4 @@ endif()
 add_subdirectory(3rdpackages/B-tree)
 #add_subdirectory(client)
 add_subdirectory(server)
+add_subdirectory(NeoChatClient)
