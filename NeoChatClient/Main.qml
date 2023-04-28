@@ -136,7 +136,7 @@ Window {
 
      // 检测请求请求状态
     function check_login_status(res) {
-      console.log("asdf")
+        console.log(JSON.stringify(res))
     }
 
     function request(headerArgs,callback) {
@@ -146,8 +146,12 @@ Window {
         if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
           print('HEADERS_RECEIVED');
         } else if(xhr.readyState === XMLHttpRequest.DONE) {
-          print("DONE")
-          var res = JSON.parse(xhr.responseText.toString())
+            let res = {
+                status: xhr.status,
+                headers: xhr.getAllResponseHeaders(),
+                contentType: xhr.responseType,
+                content : xhr.response
+            }
           callback(res)
         }
       }

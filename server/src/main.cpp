@@ -13,13 +13,12 @@ int main (int argc, char* argv[]) {
   epoll_event events[MAX_EVENTS_NUMBER];
   
   /* load server configuration file */
-  re_conf_status =
-    re_conf.Load (CONFIGPATH);
+  re_conf_status = re_conf.Load (CONFIGPATH);
   if (!re_conf_status) {
     return -1;
   }
   // init thread pool
-  pool.Init (10);
+  pool.Init (re_conf.GetInt ("THREADPOLLNUM"));
   /* init server */
   listen_fd = ser.Init (re_conf.GetChar ("SERVERIP"),
                         re_conf.GetInt ("SERVERPORT"));

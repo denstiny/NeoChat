@@ -32,6 +32,7 @@ const static std::unordered_map<Sex, std::string> SexValue {
 #define MESSAGE_VOICE "voice"
 #define MESSAGE_CALL "call"
 #define MESSAGE_VIDEOCALL "videocall"
+
 enum class MessageType {
   login, // 登陆
   registered, // 注册

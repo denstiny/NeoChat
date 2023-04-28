@@ -86,10 +86,10 @@ std::string  Server::ResultMessageString (int sock_fd)  {
     int ret = recv (sock_fd, buf, BUFSIZ - 1, 0);
     if (ret < 0) {
       if (errno == EAGAIN || errno == EWOULDBLOCK) {
-        std::cout << RED << "数据读取完毕" << RESET << std::endl;
-        close (sock_fd);
+        std::cout << RED << "数据读取完毕" << RESET << "\n\n\n";
         return message;
       }
+      close (sock_fd);
       break;
     } else if (ret == 0) {
       std::cout << CYAN << sock_fd << " 客户端关闭连接 " << RESET << std::endl;
@@ -128,6 +128,9 @@ void Server::SmallMessageProcess (Map header, int sock)  {
       case MessageType::login: { // 登陆
         std::cout << GREEN << "客户端请求登陆" << RESET << std::endl;
         std::string message = ResultLoginString (header);
+        std::cout << GREEN << "---- show res message";
+        std::cout << message << std::endl;
+        std::cout  << "---- end res message" << RESET << std::endl;
         pool->Submit (SendMessage, message, sock);
         break;
       }
@@ -178,8 +181,9 @@ std::string Server::ResultLoginString (const Map header)  {
   std::cout << "查询到" << dataSchema.CountQuery (res) << "条数据" <<
             std::endl;
   if (dataSchema.CountQuery (res) == 1) {
-    return std::string ("message_type: ") + MESSAGE_LOGIN  + "\r\n" +
-           RESULT_SUCCESSFUL_MESSAGE;
+    std::cout <<  "登陆成功"  << std::endl;
+    return RESULT_SUCCESSFUL_MESSAGE + std::string ("message_type: ") +
+           MESSAGE_LOGIN;
   }
   return RESULT_ERROR_MESSAGE;
 }

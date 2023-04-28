@@ -19,6 +19,7 @@ include_directories(src/modules)
 file(GLOB_RECURSE source_src src/*.cpp src/*.hpp)
 list(REMOVE_ITEM source_src ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 include_directories(${MYSQL_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3rdpackages/)
 link_directories(${MYSQL_LIBRARY_DIRS})
 add_executable(${BINNAME} src/main.cpp ${source_src})
 
@@ -26,7 +27,8 @@ target_include_directories(${BINNAME} PRIVATE ${MYSQL_INCLUDE_DIRS})
 target_link_libraries(${BINNAME}
   #PkgConfig::mysqlclient
   ${MYSQL_LIBRARIES}
-  cppbtree)
+  cppbtree
+  cppjson)
 
 # # run test task
 # add_executable(test_mysql test/test_mysql.cpp ${source_src})

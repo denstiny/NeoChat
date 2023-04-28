@@ -11,17 +11,13 @@
 #include <cstdio>
 #include <map>
 #include <tasks/tasks.hpp>
-#include "colorcout/colorcout.hpp"
 #include "Message/MessageProcessor.hpp"
 #include <user/user.hpp>
 #include <unordered_map>
 #include <database/database.hpp>
+#include "colorcout/colorcout.hpp"
+#include "./response.hpp"
 #define MAX_EVENTS_NUMBER 1024
-
-const std::string RESULT_ERROR_MESSAGE =
-  "HTTP/1.0 500 Internal Server Error\r\nstate: 404\r\n\r\n";
-const std::string RESULT_SUCCESSFUL_MESSAGE =
-  "HTTP/1.0 200 OK\r\nstate: 200\r\n\r\n";
 
 class Server {
   public:
