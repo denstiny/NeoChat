@@ -1,4 +1,6 @@
 /build/**
 !/build/tasks.ini
 /server/.cache/
+/CMakeLists.txt.user/
 /.cache/
+
