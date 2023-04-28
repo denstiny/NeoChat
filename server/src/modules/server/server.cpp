@@ -68,6 +68,7 @@ void Server::EventWith (int epoll_fd, int number, int listen_fd,
     // 如果不是server_fd 触发事件，则说明connect_fd 发生可读或可写事件
     else if (events[i].events & EPOLLIN) {
       std::string result_str = ResultMessageString (sock_fd);
+      std::cout << GREEN << result_str << std::endl;
       Map header =  parseMessageRequestHeaders (result_str);
       SmallMessageProcess (header, sock_fd);
     } else {
@@ -86,9 +87,9 @@ std::string  Server::ResultMessageString (int sock_fd)  {
     if (ret < 0) {
       if (errno == EAGAIN || errno == EWOULDBLOCK) {
         std::cout << RED << "数据读取完毕" << RESET << std::endl;
+        close (sock_fd);
         return message;
       }
-      close (sock_fd);
       break;
     } else if (ret == 0) {
       std::cout << CYAN << sock_fd << " 客户端关闭连接 " << RESET << std::endl;
@@ -104,7 +105,7 @@ std::string  Server::ResultMessageString (int sock_fd)  {
 // 处理客户端消息
 void Server::SmallMessageProcess (Map header, int sock)  {
   ShowMessageHeader (header);
-  std::cout << RED << "处理客户" << sock << "端消息" << RESET << std::endl;
+  std::cout << RED << "处理" << sock << "客户端消息" << RESET << std::endl;
   int client_sock;
   if (header.count ("type") == 0) {
     std::cout << "没有找到 消息类型" << std::endl;

@@ -6,7 +6,6 @@
 #include <sys/unistd.h>
 #include <iostream>
 #include <regex>
-#include "colorcout/colorcout.hpp"
 
 using Map = std::unordered_map<std::string, std::string>;
 Map parseMessageRequestHeaders (std::string header);

@@ -1,6 +1,0 @@
-.cache
-.xmake
-/.cache/
-/build/**
-!/build/tasks.ini
-!/build/ChatServer

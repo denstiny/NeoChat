@@ -1,8 +1,11 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
+import QtQuick.Controls 2.0
+import com.neochat.network 1.0
 
 Window {
+    id:win
     width: 1367
     height: 812
     minimumWidth: 300
@@ -10,6 +13,12 @@ Window {
     title: qsTr("NeoChat")
     flags: Qt.Tool
     color: "#17212B"
+    NeoChatNetoWork {
+      id: network
+
+    }
+
+
     RowLayout {
       anchors.fill: parent
       anchors.margins: 10
@@ -21,7 +30,7 @@ Window {
         Layout.maximumWidth: parent.width * 0.3
         Layout.minimumWidth: 300
         onOpenLeftMenu: {
-            leftmenu.visible = true
+          leftmenu.visible = true
         }
       }
       ChatWindow{
@@ -33,16 +42,16 @@ Window {
       }
     }
     Rectangle {
-        id: window_size
-        property double parent_width: parent.width
-        property double parent_height: parent.height
+      id: window_size
+      property double parent_width: parent.width
+      property double parent_height: parent.height
 
-        anchors.centerIn: parent
-        Text {
-            id: size
-            text: qsTr(parent.parent_width + " x " + parent.parent_width)
-            color: "#FFFFFF"
-        }
+      anchors.centerIn: parent
+      Text {
+        id: size
+        text: qsTr(parent.parent_width + " x " + parent.parent_height)
+        color: "#FFFFFF"
+      }
     }
     Rectangle {
       // 网络状况
@@ -57,6 +66,7 @@ Window {
       anchors.left: parent.left
       anchors.margins: 10
       radius: width/2
+
       Image {
         anchors.fill: parent
         id: icon
@@ -97,13 +107,56 @@ Window {
             console.log("代理设置")
           }
         }
+        focus: true
+        Keys.onTabPressed: {
+          win.width = win.width + 50
+          win.height = win.height + 50
+          if (win.width > 1800){
+            win.width = 1367
+            win.height = 812
+          }
+        }
       }
     }
     LeftMenu {
-        id: leftmenu
-        visible: false
-        z: 3
-        height: parent.height
-        width: 320
+      id: leftmenu
+      visible: false
+      height: parent.height
+      property int default_width: 320
+      width: 0
     }
+    Component.onCompleted: {
+        request({
+                    "message_type":"login",
+                    "type": "POST",
+                    "user_account": "101",
+                    "user_password": "asd"
+                },check_login_status)
+    }
+
+     // 检测请求请求状态
+    function check_login_status(res) {
+      console.log("asdf")
+    }
+
+    function request(headerArgs,callback) {
+      console.log("send login to server")
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.HEADERS_RECEIVED) {
+          print('HEADERS_RECEIVED');
+        } else if(xhr.readyState === XMLHttpRequest.DONE) {
+          print("DONE")
+          var res = JSON.parse(xhr.responseText.toString())
+          callback(res)
+        }
+      }
+      xhr.open("POST", "http://127.0.0.1:6667");
+      for(var key in headerArgs) {
+          xhr.setRequestHeader(key,headerArgs[key])
+      }
+      xhr.send();
+    }
+
 }
+

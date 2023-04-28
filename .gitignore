@@ -1,1 +1,4 @@
-build
+/build/**
+!/build/tasks.ini
+/server/.cache/
+/.cache/

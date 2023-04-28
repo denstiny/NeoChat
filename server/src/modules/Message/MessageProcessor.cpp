@@ -1,4 +1,5 @@
 #include "MessageProcessor.hpp"
+#include "colorcout/colorcout.hpp"
 
 // 解析 消息相应头
 Map parseMessageRequestHeaders (std::string httpResponse)  {
@@ -33,6 +34,7 @@ void SendMessage (std::string message, int sock)  {
   }
   
   std::cout << "消息发送完毕" << std::endl;
+  //close (sock);
 }
 
 void ShowMessageHeader (Map header)  {

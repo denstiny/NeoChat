@@ -108,7 +108,8 @@ Rectangle {
         Layout.fillHeight: true
         color: "#0E1621"
         signal showGotoBottom(bool isshow)
-        onShowGotoBottom: {
+
+        onShowGotoBottom: function(isshow) {
           gotoBottomButtom.visible = !isshow
         }
 
@@ -128,7 +129,7 @@ Rectangle {
           model: 20
           delegate: Rectangle {
             color: "#0E1621"
-            width: parent.width
+            width: messageList.width
             height: 50
             MouseArea {
               anchors.fill: parent

@@ -9,13 +9,13 @@ find_package(Qt6 6.4 REQUIRED COMPONENTS Quick Multimedia)
 qt_standard_project_setup()
 
 qt_add_executable(appNeoChatClient
-  main.cpp
+  main.cpp clientnetwork.cpp clientnetwork.h
 )
 
 qt_add_qml_module(appNeoChatClient
     URI NeoChatClient
     VERSION 1.0
-    QML_FILES Main.qml LoginWindow.qml MessageWindow.qml ChatListMenu.qml ChatWindow.qml LeftMenu.qml Leftmenubutton.qml
+    QML_FILES Main.qml LoginWindow.qml MessageWindow.qml ChatListMenu.qml ChatWindow.qml LeftMenu.qml Leftmenubutton.qml NeoChat.qml
     QML_FILES ${QMLFILES}
 )
 

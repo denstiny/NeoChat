@@ -5,13 +5,13 @@ import QtQuick.Layouts 1.0
 
 Rectangle {
     id: root
+    color: "#17212B"
     Text {
         anchors.centerIn: parent
         id: text
         text: qsTr(parent.height + " x "+ parent.width)
     }
     signal openLeftMenu()
-
     ColumnLayout{
         spacing: 2
         anchors.fill: parent
@@ -66,7 +66,8 @@ Rectangle {
             }
         }
         Rectangle {
-            anchors.top: menu.bottom
+//            anchors.top: menu.bottom
+            id: chatcientlist
             Layout.fillWidth: true
             Layout.fillHeight: true
             color: "#17212B"
@@ -78,7 +79,7 @@ Rectangle {
               spacing: 1
               model: 100
               delegate: Rectangle{
-                width: parent.width
+                width: chatcientlist.width
                 height: 50
                 color: "#17212B"
                 MouseArea {
