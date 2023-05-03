@@ -3,10 +3,8 @@
 #include <map>
 
 const std::string RESULT_ERROR_MESSAGE =
-  "HTTP/1.1 404 Internal Server Error\r\n\r\n";
+  "{}";
 
-const std::string RESULT_SUCCESSFUL_MESSAGE =
-  "HTTP/1.1 200 OK\r\nContent-Type: application/json\r\n";
 namespace Res {
 std::string I_str (std::string str);
 };

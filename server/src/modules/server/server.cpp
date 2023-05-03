@@ -69,8 +69,7 @@ void Server::EventWith (int epoll_fd, int number, int listen_fd,
     else if (events[i].events & EPOLLIN) {
       std::string result_str = ResultMessageString (sock_fd);
       std::cout << GREEN << result_str << std::endl;
-      Map header =  parseMessageRequestHeaders (result_str);
-      SmallMessageProcess (header, sock_fd);
+      SmallMessageProcess (result_str, sock_fd);
     } else {
       std::cout << BOLDBLACK << "其他事情发生" << RESET << std::endl;
     }
@@ -95,71 +94,65 @@ std::string  Server::ResultMessageString (int sock_fd)  {
       std::cout << CYAN << sock_fd << " 客户端关闭连接 " << RESET << std::endl;
       close (sock_fd);
     } else {
-      //std::cout << GREEN << "USER: " << buf << RESET << std::endl;
       message += buf;
     }
   }
   return message;
 }
 
-// 处理客户端消息
-void Server::SmallMessageProcess (Map header, int sock)  {
-  ShowMessageHeader (header);
-  std::cout << RED << "处理" << sock << "客户端消息" << RESET << std::endl;
-  int client_sock;
-  if (header.count ("type") == 0) {
-    std::cout << "没有找到 消息类型" << std::endl;
+// 处理客户端请求
+void Server::SmallMessageProcess (std::string response, int sock)  {
+  nl_json body;
+  
+  try {
+    body = nl_json::parse (response);
+  } catch (nl_json::parse_error) {
     pool->Submit (SendMessage, RESULT_ERROR_MESSAGE, sock);
+  }
+  std::cout << YELLOW << body.dump (4) << RESET << std::endl;
+  if (not body.contains ("message_type")) {
+    pool->Submit (SendMessage, RESULT_ERROR_MESSAGE, sock);
+  }
+  const std::string message_type = body["message_type"];
+  // 检查类型是否正确
+  if (MessageTypeValue.find (message_type) == MessageTypeValue.end()) {
+    pool->Submit (SendMessage, RESULT_ERROR_MESSAGE, sock);
+    std::cout << "类型不正确" << std::endl;
     return;
   }
-  if (header["type"] == "POST") {
-    if (header.count ("message_type") == 0) { // 无效消息
-      std::cout << "无效消息" << std::endl;
-      return;
+  MessageType type =  MessageTypeValue.at (message_type);
+  switch (type) {
+    case MessageType::login: { // 登陆
+      std::cout << GREEN << "客户端请求登陆" << RESET << std::endl;
+      std::string message = ResultLoginString (body);
+      std::cout << GREEN << "---- show res message\n";
+      std::cout << message << std::endl;
+      std::cout  << "---- end res message" << RESET << std::endl;
+      pool->Submit (SendMessage, message, sock);
+      break;
     }
-    const std::string message_type = header["message_type"];
-    // 检查类型是否正确
-    if (MessageTypeValue.find (message_type) == MessageTypeValue.end()) {
-      std::cout << "客户端类型不正确" << std::endl;
-      return;
+    case MessageType::registered: { // 注册
+      std::string message = ResultRegisteredString (body);
+      pool->Submit (SendMessage, message, sock);
+      break;
     }
-    MessageType type =  MessageTypeValue.at (message_type);
-    switch (type) {
-      case MessageType::login: { // 登陆
-        std::cout << GREEN << "客户端请求登陆" << RESET << std::endl;
-        std::string message = ResultLoginString (header);
-        std::cout << GREEN << "---- show res message";
-        std::cout << message << std::endl;
-        std::cout  << "---- end res message" << RESET << std::endl;
-        pool->Submit (SendMessage, message, sock);
-        break;
-      }
-      case MessageType::registered: { // 注册
-        std::string message = ResultRegisteredString (header);
-        pool->Submit (SendMessage, message, sock);
-        break;
-      }
-      case MessageType::videocall: { // 视频电话
-        break;
-      }
-      case MessageType::text: { // 文本消息
-        int clinet_sock;
-        std::string message = ResultTextString (header, client_sock);
-        pool->Submit (SendMessage, message, client_sock);
-        break;
-      }
-      case MessageType::call: { // 电话
-        break;
-      }
-      case MessageType::voice: { // 语音
-        break;
-      }
-      default: break;
+    case MessageType::videocall: { // 视频电话
+      break;
     }
+    case MessageType::text: { // 文本消息
+      int clinet_sock;
+      std::string message = ResultTextString (body, clinet_sock);
+      pool->Submit (SendMessage, message, clinet_sock);
+      break;
+    }
+    case MessageType::call: { // 电话
+      break;
+    }
+    case MessageType::voice: { // 语音
+      break;
+    }
+    default: break;
   }
-  if (header["type"] == "GET") {
-  }
-  std::cout << "处理" << sock << "消息结束" << std::endl;
 }
 
 /**
@@ -167,23 +160,28 @@ void Server::SmallMessageProcess (Map header, int sock)  {
    @param header
    @return
 */
-std::string Server::ResultLoginString (const Map header)  {
-  if (header.find ("user_account") == header.end()
-      or header.find ("user_password") == header.end()) {
+std::string Server::ResultLoginString (const nl_json body)  {
+  if (not body.contains ("user_account") or not body.contains ("user_password")) {
     std::cout << "查询失败" << std::endl;
     return RESULT_ERROR_MESSAGE;
   }
+  std::string user_account = body["user_account"];
+  std::string user_password = body["user_password"];
   MYSQL_RES* res =
     dataSchema.Query ("select * from m_base.User where user_account = " +
-                      header.at ("user_account") +
+                      user_account +
                       " and user_password='" +
-                      header.at ("user_password") + "';" );
+                      user_password + "';" );
   std::cout << "查询到" << dataSchema.CountQuery (res) << "条数据" <<
             std::endl;
+            
   if (dataSchema.CountQuery (res) == 1) {
     std::cout <<  "登陆成功"  << std::endl;
-    return RESULT_SUCCESSFUL_MESSAGE + std::string ("message_type: ") +
-           MESSAGE_LOGIN;
+    nl_json obj = {
+      {"message_type", MESSAGE_LOGIN},
+      {"status", true}
+    };
+    return obj.dump();
   }
   return RESULT_ERROR_MESSAGE;
 }
@@ -193,7 +191,7 @@ std::string Server::ResultLoginString (const Map header)  {
    @param header
    @return
 */
-std::string Server::ResultRegisteredString (const Map header)  {
+std::string Server::ResultRegisteredString (const nl_json body)  {
   return RESULT_ERROR_MESSAGE;
 }
 
@@ -203,6 +201,6 @@ std::string Server::ResultRegisteredString (const Map header)  {
    @param client_sock
    @return
 */
-std::string Server::ResultTextString (const Map header, int& client_sock)  {
+std::string Server::ResultTextString (const nl_json body, int& client_sock)  {
   return std::string();
 }

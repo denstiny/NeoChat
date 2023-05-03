@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file>Main.qml</file>
+        <file>NeoChat.qml</file>
+        <file>ChatListMenu.qml</file>
+        <file>ChatWindow.qml</file>
+        <file>LeftMenu.qml</file>
+        <file>Leftmenubutton.qml</file>
+        <file>LoginWindow.qml</file>
+        <file>MessageWindow.qml</file>
+        <file>Login.qml</file>
+        <file>Register.qml</file>
+        <file>Communication.js</file>
+        <file>User.qml</file>
+        <file>AddFriend.qml</file>
+    </qresource>
+</RCC>

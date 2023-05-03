@@ -73,5 +73,6 @@ MYSQL_RES* DataSchema::Query (std::string  queryString)  {
 
 // 统计查询结构数量
 int DataSchema::CountQuery (MYSQL_RES* res)  {
+  if (res == nullptr) { return 0; }
   return mysql_num_rows (res);
 }

@@ -32,7 +32,7 @@ Rectangle {
                         Layout.alignment: Qt.AlignCenter | Qt.AlignLeft
                         Layout.preferredHeight: parent.height * 0.8
                         Layout.leftMargin: 8
-                        icon.source:  RES  + "SideButtonLeave.png"
+                        icon.source:  "qrc:/images/SideButtonLeave.png"
                         background: Rectangle {
                             border.width: 0
                             color: "#17212B"
@@ -42,9 +42,9 @@ Rectangle {
                         }
                         onHoveredChanged:  {
                             if(hovered) {
-                                menuButton.icon.source = RES + "SideButtonEnter.png"
+                                menuButton.icon.source = "qrc:/images/SideButtonEnter.png"
                             }else {
-                                menuButton.icon.source = RES + "SideButtonLeave.png"
+                                menuButton.icon.source = "qrc:/images/SideButtonLeave.png"
                             }
                         }
                     }

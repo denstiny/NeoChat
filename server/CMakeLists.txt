@@ -24,11 +24,13 @@ link_directories(${MYSQL_LIBRARY_DIRS})
 add_executable(${BINNAME} src/main.cpp ${source_src})
 
 target_include_directories(${BINNAME} PRIVATE ${MYSQL_INCLUDE_DIRS})
+
 target_link_libraries(${BINNAME}
   #PkgConfig::mysqlclient
   ${MYSQL_LIBRARIES}
   cppbtree
-  cppjson)
+  cppjson
+  )
 
 # # run test task
 # add_executable(test_mysql test/test_mysql.cpp ${source_src})

@@ -43,59 +43,59 @@ Rectangle {
               }
               Button {
                 id: searchButton
-                icon.source: RES + "search_leave.png"
+                icon.source: "qrc:/images/search_leave.png"
                 background: Rectangle{
                     color: "transparent"
                 }
                 onHoveredChanged: {
                   if(hovered) {
-                    icon.source = RES + "search_enter.png"
+                    icon.source = "qrc:/images/search_enter.png"
                   }else {
-                    icon.source = RES + "search_leave.png"
+                    icon.source = "qrc:/images/search_leave.png"
                   }
                 }
               }
               Button {
                 id: callButton
-                icon.source: RES + "call_leave.png"
+                icon.source: "qrc:/images/call_leave.png"
                 background: Rectangle{
                     color: "transparent"
                 }
                 onHoveredChanged: {
                   if(hovered) {
-                    icon.source = RES + "call_enter.png"
+                    icon.source = "qrc:/images/call_enter.png"
                   }else {
-                    icon.source = RES + "call_leave.png"
+                    icon.source = "qrc:/images/call_leave.png"
                   }
                 }
               }
               Button {
                   // 打开右侧边栏
                 id: rightmenuButton
-                icon.source: RES + "rightbutton_leaver.png"
+                icon.source: "qrc:/images/rightbutton_leaver.png"
                 background: Rectangle{
                     color: "transparent"
                 }
                 onHoveredChanged: {
                   if(hovered) {
-                    icon.source = RES + "rightbutton_enter.png"
+                    icon.source = "qrc:/images/rightbutton_enter.png"
                   }else {
-                    icon.source = RES + "rightbutton_leaver.png"
+                    icon.source = "qrc:/images/rightbutton_leaver.png"
                   }
                 }
               }
               Button {
                   // 打开右侧边栏
                 id: dots_button
-                icon.source: RES + "dots_leave.png"
+                icon.source: "qrc:/images/dots_leave.png"
                 background: Rectangle{
                     color: "transparent"
                 }
                 onHoveredChanged: {
                   if(hovered) {
-                    icon.source = RES + "dots_enter.png"
+                    icon.source = "qrc:/images/dots_enter.png"
                   }else {
-                    icon.source = RES + "dots_leave.png"
+                    icon.source = "qrc:/images/dots_leave.png"
                   }
                 }
               }
@@ -163,7 +163,7 @@ Rectangle {
             anchors.margins: 9
             anchors.fill: parent
             id: bottomIcon
-            source: RES + "movebottom.png"
+            source: "qrc:/images/movebottom.png"
           }
             MouseArea {
               anchors.fill: parent
@@ -172,10 +172,10 @@ Rectangle {
                 console.log("跳转到最下方")
               }
               onEntered: {
-                bottomIcon.source = RES + "movebottomEnter.png"
+                bottomIcon.source = "qrc:/images/movebottomEnter.png"
               }
               onExited: {
-                bottomIcon.source = RES + "movebottom.png"
+                bottomIcon.source = "qrc:/images/movebottom.png"
               }
             }
         }
@@ -197,12 +197,12 @@ Rectangle {
             background: Rectangle {
               color: "transparent"
             }
-            icon.source: RES + "file_leave.png"
+            icon.source: "qrc:/images/file_leave.png"
             onHoveredChanged: {
               if(hovered) {
-                icon.source = RES + "file_enter.png"
+                icon.source = "qrc:/images/file_enter.png"
               }else
-                icon.source = RES + "file_leave.png"
+                icon.source = "qrc:/images/file_leave.png"
             }
           }
           TextField {
@@ -218,7 +218,7 @@ Rectangle {
           }
           Button {
             // 表情按钮
-            icon.source : RES + "expression_leave.png"
+            icon.source : "qrc:/images/expression_leave.png"
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.maximumHeight: 40
@@ -229,15 +229,15 @@ Rectangle {
 
             onHoveredChanged:  {
               if(hovered)
-                icon.source = RES + "expression_enter.png"
+                icon.source = "qrc:/images/expression_enter.png"
               else
-                icon.source = RES + "expression_leave.png"
+                icon.source = "qrc:/images/expression_leave.png"
             }
 
           }
           Button{
             // 语音按钮
-            icon.source : RES + "voice_leave.png"
+            icon.source : "qrc:/images/voice_leave.png"
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.maximumHeight: 50
@@ -248,14 +248,14 @@ Rectangle {
 
             onHoveredChanged:  {
               if(hovered)
-                icon.source = RES + "voice_enter.png"
+                icon.source = "qrc:/images/voice_enter.png"
               else
-                icon.source = RES + "voice_leave.png"
+                icon.source = "qrc:/images/voice_leave.png"
             }
           }
           Button {
             // 发送按钮
-            icon.source : RES + "send-message.png"
+            icon.source : "qrc:/images/send-message.png"
             visible: false
             Layout.fillWidth: true
             Layout.fillHeight: true

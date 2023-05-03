@@ -7,7 +7,7 @@
 cmake_minimum_required(VERSION 3.2)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 project(cppjson CXX)
-add_definitions(-std=c++17)
+set(CMAKE_CXX_STANDARD 11)
 
 add_library(${PROJECT_NAME} json.hpp json_fwd.hpp)
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)

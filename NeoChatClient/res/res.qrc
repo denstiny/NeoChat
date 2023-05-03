@@ -1,0 +1,36 @@
+<RCC>
+  <qresource prefix="/images">
+    <file>SideButtonEnter.png</file>
+    <file>SideButtonLeave.png</file>
+    <file>arrowEnter.png</file>
+    <file>arrowLeave.png</file>
+    <file>callButton.png</file>
+    <file>call_enter.png</file>
+    <file>call_leave.png</file>
+    <file>collection.png</file>
+    <file>contact-book.png</file>
+    <file>createGroup.png</file>
+    <file>customerButton.png</file>
+    <file>dots_enter.png</file>
+    <file>dots_leave.png</file>
+    <file>down.png</file>
+    <file>expression_enter.png</file>
+    <file>expression_leave.png</file>
+    <file>file_enter.png</file>
+    <file>file_leave.png</file>
+    <file>movebottom.png</file>
+    <file>movebottomEnter.png</file>
+    <file>networkloading.png</file>
+    <file>networkok.png</file>
+    <file>night.png</file>
+    <file>rightbutton_enter.png</file>
+    <file>rightbutton_leaver.png</file>
+    <file>search_enter.png</file>
+    <file>search_leave.png</file>
+    <file>self-collect.png</file>
+    <file>send-message.png</file>
+    <file>settings.png</file>
+    <file>voice_enter.png</file>
+    <file>voice_leave.png</file>
+  </qresource>
+</RCC>

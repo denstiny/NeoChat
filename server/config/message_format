@@ -1,9 +1,6 @@
-message_id: 消息编号             # 编号 通过客户端本地生成,生成逻辑[设备名字，用户id,当前时间戳]
-message_type: ["GET","POST"]     # get 获取资源,post 发送资源,或者消息,使用post时，服务器需要审核表单是否合法,并在消息发送完成之后，回复是否合法
-get: "a.png"                     # 比如获取资源 a.png
-# post实例
-username: 用户名称
-password: 用户密码
-message_text: "你好"             # 当在发送消息时候，需要指定发送给的好友账号id
-friend: 用户id                   # 好友的账号id
-post_file: 0x00\r\n0x00\r\n      # 上传的文件,在这里发送了两个文件
+MessageId: 消息编号             # 编号 通过客户端本地生成,生成逻辑[设备名字，用户id,当前时间戳]
+Length: 消息长度
+TotalLength: 总长度
+
+
+{}                              # 消息内容(json)

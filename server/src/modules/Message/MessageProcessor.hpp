@@ -6,11 +6,7 @@
 #include <sys/unistd.h>
 #include <iostream>
 #include <regex>
-
-using Map = std::unordered_map<std::string, std::string>;
-Map parseMessageRequestHeaders (std::string header);
-void SendMessage (std::string message, int sock);
-void ShowMessageHeader (Map header);
+#include <Json/json.hpp>
 
 #define SEX_MALE "male"
 #define SEX_FEMALE "female"
@@ -49,4 +45,25 @@ const static std::unordered_map<std::string, MessageType> MessageTypeValue {
   {MESSAGE_VOICE, MessageType::voice},
   {MESSAGE_CALL, MessageType::call},
   {MESSAGE_VIDEOCALL, MessageType::videocall}
+};
+
+
+using Map = std::unordered_map<std::string, std::string>;
+Map parseMessageRequestHeaders (std::string header);
+void SendMessage (std::string message, int sock);
+void ShowMessageHeader (Map header);
+void ShowMessageBody (nlohmann::json json);
+
+class Message final {
+  public:
+    void parseMessage (std::string response);
+    void showMessage();
+    const std::string getMessageId();
+    const std::string getMessageLength();
+    const std::string getMessageTotalLength();
+    const nlohmann::json getBody();
+    const std::string getHeaderVaue (std::string key);
+  private:
+    Map header;
+    nlohmann::json body;
 };

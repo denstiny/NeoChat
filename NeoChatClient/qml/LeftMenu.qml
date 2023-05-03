@@ -62,7 +62,7 @@ Popup {
           width: parent.width
           height: buttonList.button_height
           text: "新建组群"
-          icon: RES + "createGroup.png"
+          icon: "qrc:/images/createGroup.png"
           onClicked: {
             console.log("新建族群")
           }
@@ -71,7 +71,7 @@ Popup {
           width: parent.width
           height: buttonList.button_height
           text: "新建频道"
-          icon: RES + "customerButton.png"
+          icon: "qrc:/images/customerButton.png"
           onClicked: {
             console.log("新建频道")
           }
@@ -80,7 +80,7 @@ Popup {
           width: parent.width
           height: buttonList.button_height
           text: "联系人"
-          icon: RES + "contact-book.png"
+          icon: "qrc:/images/contact-book.png"
           onClicked: {
             console.log("联系人")
           }
@@ -89,7 +89,7 @@ Popup {
           width: parent.width
           height: buttonList.button_height
           text: "通话"
-          icon: RES + "callButton.png"
+          icon: "qrc:/images/callButton.png"
           onClicked: {
             console.log("通话")
           }
@@ -98,7 +98,7 @@ Popup {
           width: parent.width
           height: buttonList.button_height
           text: "我的收藏"
-          icon:  RES + "collection.png"
+          icon:  "qrc:/images/collection.png"
           onClicked: {
             console.log("我的收藏")
           }
@@ -107,7 +107,7 @@ Popup {
           width: parent.width
           height: buttonList.button_height
           text: "设置"
-          icon: RES + "settings.png"
+          icon: "qrc:/images/settings.png"
           onClicked: {
             console.log("设置")
           }
@@ -116,7 +116,7 @@ Popup {
           width: parent.width
           height: buttonList.button_height
           text: "夜间模式"
-          icon: RES + "night.png"
+          icon: "qrc:/images/night.png"
           onClicked: {
             console.log("夜间模式")
           }

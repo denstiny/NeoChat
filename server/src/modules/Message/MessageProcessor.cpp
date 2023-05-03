@@ -21,6 +21,21 @@ Map parseMessageRequestHeaders (std::string httpResponse)  {
   return header;
 }
 
+// 解析请求内容
+nlohmann::json parseMessageRequestBody (std::string response) {
+  nlohmann::json body;
+  size_t bodyStart =  response.find ("\r\n\r\n");
+  if (bodyStart != std::string::npos) {
+    std::string body_str = response.substr (bodyStart + 4);
+    try {
+      body = nlohmann::json::parse (body_str);
+    } catch (nlohmann::json::parse_error) {
+      body = {};
+    }
+  }
+  return body;
+}
+
 void SendMessage (std::string message, int sock)  {
   std::cout << "发送消息给客户端" << std::endl;
   size_t len = message.size();
@@ -50,4 +65,44 @@ void ShowMessageHeader (Map header)  {
               << std::endl;
   }
   std::cout << RED << " ---- end message header" << RESET << std::endl;
+}
+
+void ShowMessageBody (nlohmann::json json) {
+  std::cout << RED << " ---- show message body" << RESET << std::endl;
+  std::cout << GREEN << json.dump (4) << RESET;
+  std::cout << RED << " ---- end message body" << RESET << std::endl;
+}
+
+
+const std::string Message::getMessageId()  {
+  return getHeaderVaue ("MessageId");
+}
+
+const std::string Message::getHeaderVaue (std::string key)  {
+  if (header.count (key) == 0) {
+    return std::string();
+  }
+  return header[key];
+}
+
+const std::string Message::getMessageLength()  {
+  return getHeaderVaue ("MessageLength");
+}
+
+const std::string Message::getMessageTotalLength()  {
+  return getHeaderVaue ("TotalLength");
+}
+
+const nlohmann::json Message::getBody()  {
+  return body;
+}
+
+void Message::parseMessage (std::string response)  {
+  header = parseMessageRequestHeaders (response);
+  body = parseMessageRequestBody (response);
+}
+
+void Message::showMessage()  {
+  ShowMessageHeader (header);
+  ShowMessageBody (body);
 }

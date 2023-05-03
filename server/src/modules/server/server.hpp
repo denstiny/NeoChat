@@ -18,6 +18,7 @@
 #include "colorcout/colorcout.hpp"
 #include "./response.hpp"
 #define MAX_EVENTS_NUMBER 1024
+using nl_json = nlohmann::json;
 
 class Server {
   public:
@@ -30,13 +31,13 @@ class Server {
     void EventWith (int epoll_fd, int number, int  listen_fd, epoll_event* event);
   private:
     std::string ResultMessageString (int socket);
-    void SmallMessageProcess (Map header, int sock);
+    void SmallMessageProcess (std::string response, int sock);
     // Processing login response
-    std::string ResultLoginString (const Map header);
+    std::string ResultLoginString (const nl_json header);
     // Processing registration response
-    std::string ResultRegisteredString (const Map header);
+    std::string ResultRegisteredString (const nl_json header);
     // Processing text response
-    std::string ResultTextString (const Map header, int& client_sock);
+    std::string ResultTextString (const nl_json header, int& client_sock);
   private:
     std::unordered_map<std::string, User> user_map; // 用户列表
     char* ip;               // ip地址
