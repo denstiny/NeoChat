@@ -1,2 +1,6 @@
 #pragma once
-//TODO: 实现日志系统
+#include <iostream>
+#include <colorcout/colorcout.hpp>
+#include <string>
+
+void colorcout (const char* color, std::string message);

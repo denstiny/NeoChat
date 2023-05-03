@@ -15,6 +15,7 @@ class DataSchema {
     // query mysql
     MYSQL_RES* Query (std::string queryString);
     int CountQuery (MYSQL_RES*);
+    bool CheckQuery (std::string queryString);
     ~DataSchema();
   private:
     void init_mysql();

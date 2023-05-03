@@ -33,11 +33,13 @@ class Server {
     std::string ResultMessageString (int socket);
     void SmallMessageProcess (std::string response, int sock);
     // Processing login response
-    std::string ResultLoginString (const nl_json header);
+    std::string ResultLoginString (const nl_json body);
     // Processing registration response
-    std::string ResultRegisteredString (const nl_json header);
+    std::string ResultRegisteredString (const nl_json body);
     // Processing text response
-    std::string ResultTextString (const nl_json header, int& client_sock);
+    std::string ResultTextString (const nl_json body, int& client_sock);
+    // 用户添加好友
+    std::string ResultAddFrendString (const nl_json body);
   private:
     std::unordered_map<std::string, User> user_map; // 用户列表
     char* ip;               // ip地址

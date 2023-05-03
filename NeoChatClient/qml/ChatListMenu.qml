@@ -11,6 +11,7 @@ Rectangle {
         id: text
         text: qsTr(parent.height + " x "+ parent.width)
     }
+
     signal openLeftMenu()
     ColumnLayout{
         spacing: 2

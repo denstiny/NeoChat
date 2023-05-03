@@ -170,6 +170,7 @@ Rectangle {
               hoverEnabled: true
               onClicked: {
                 console.log("跳转到最下方")
+                  scrollbar.position = 1-scrollbar.size;
               }
               onEntered: {
                 bottomIcon.source = "qrc:/images/movebottomEnter.png"

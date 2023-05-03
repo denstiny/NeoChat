@@ -131,6 +131,16 @@ void Server::SmallMessageProcess (std::string response, int sock)  {
       pool->Submit (SendMessage, message, sock);
       break;
     }
+    
+    case MessageType::addfrend: { // 添加好友
+      std::cout << GREEN << "用户添加好友" << RESET << std::endl;
+      std::string message = ResultAddFrendString (body);
+      std::cout << GREEN << "---- show res message\n";
+      std::cout << message << std::endl;
+      std::cout << "---- end res message" << RESET << std::endl;
+      pool->Submit (SendMessage, message, sock);
+      break;
+    }
     case MessageType::registered: { // 注册
       std::string message = ResultRegisteredString (body);
       pool->Submit (SendMessage, message, sock);
@@ -162,20 +172,17 @@ void Server::SmallMessageProcess (std::string response, int sock)  {
 */
 std::string Server::ResultLoginString (const nl_json body)  {
   if (not body.contains ("user_account") or not body.contains ("user_password")) {
-    std::cout << "查询失败" << std::endl;
+    std::cout << "缺少查询必要的属性" << std::endl;
     return RESULT_ERROR_MESSAGE;
   }
   std::string user_account = body["user_account"];
   std::string user_password = body["user_password"];
-  MYSQL_RES* res =
-    dataSchema.Query ("select * from m_base.User where user_account = " +
-                      user_account +
-                      " and user_password='" +
-                      user_password + "';" );
-  std::cout << "查询到" << dataSchema.CountQuery (res) << "条数据" <<
-            std::endl;
-            
-  if (dataSchema.CountQuery (res) == 1) {
+  std::string query_string = "select * from m_base.User where user_account = '" +
+                             user_account +
+                             "' and user_password='" +
+                             user_password + "';" ;
+                             
+  if (dataSchema.CheckQuery (query_string)) {
     std::cout <<  "登陆成功"  << std::endl;
     nl_json obj = {
       {"message_type", MESSAGE_LOGIN},
@@ -203,4 +210,26 @@ std::string Server::ResultRegisteredString (const nl_json body)  {
 */
 std::string Server::ResultTextString (const nl_json body, int& client_sock)  {
   return std::string();
+}
+
+std::string Server::ResultAddFrendString (const nl_json body)  {
+  if (not body.contains ("user_account") or not body.contains ("user_phone")) {
+    std::cout << "缺少查询必要的属性" << std::endl;
+    return RESULT_ERROR_MESSAGE;
+  }
+  std::string user_account = body["user_account"];
+  std::string user_phone = body["user_phone"];
+  
+  std::string query_string = "select * from m_base.User where user_account = '"
+                             + user_account
+                             + "' and user_phone = '"
+                             + user_phone + "';";
+  if (dataSchema.CheckQuery (query_string)) {
+    nl_json obj = {
+      {"message_type", MESSAGE_ADDFREND},
+      {"status", true}
+    };
+    return obj.dump();
+  }
+  return RESULT_ERROR_MESSAGE;
 }

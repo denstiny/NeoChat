@@ -3,6 +3,7 @@
 BaseCommun::BaseCommun(QObject *parent)
     : QObject{parent}
 {
+    qDebug() << "创建通信核心";
 }
 
 /**
@@ -36,6 +37,7 @@ BaseCommun::~BaseCommun() {
    @param message
 */
 void BaseCommun::SendMessage (const QString& message)  {
+    qDebug() << message ;
     qint64 byteswriten = 0;
     qint64 totalbytes = message.size();
     qint64 wirtelen = 0;

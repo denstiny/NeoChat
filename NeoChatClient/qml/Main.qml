@@ -21,12 +21,7 @@ Window {
     signal updateLogin
     signal messageListen(string message)
 
-    BaseCommunObject {
-        id: baseCommun
-        ip: "127.0.0.1"
-        port: 6667
-    }
-
+    property var $baseCommun: Comm{}
 
     Settings {
         id: setting
@@ -58,6 +53,7 @@ Window {
             Layout.maximumWidth: parent.width * 0.7
         }
     }
+
     Rectangle {
         id: window_size
         property double parent_width: parent.width
@@ -158,15 +154,15 @@ Window {
         }
     }
 
+
     onUpdateLogin: {
         console.log("account: " + setting.user_account + "\n" + "password:" + setting.user_password)
     }
 
     Component.onCompleted: {
-
-        baseCommun.InitServer(baseCommun.ip,baseCommun.port)
+        $baseCommun.InitServer($baseCommun.ip,$baseCommun.port)
         // 消息日志，连接服务器状态
-        baseCommun.is_connected.connect(function(status){
+        $baseCommun.is_connected.connect(function(status){
             if(status) {
                 console.log("连接服务器成功")
             }
@@ -197,14 +193,48 @@ Window {
         }
 
         // 监听的新的消息
-        baseCommun.newMessage.connect(function(message){
+        $baseCommun.newMessage.connect(function(message){
+            console.log("RES: " + message)
             var mes = JSON.parse(message)
+            // 登陆
             if(mes.message_type === "login") {
                 loginStatus(mes.status)
+            }
+            // 注册
+            if(mes.message_type === "registered") {
+
+            }
+            // 用户消息
+            if(mes.message_type === "text") {
+
+            }
+            // 语音消息
+            if(mes.message_type === "voice") {
+
+            }
+            // 电话
+            if(mes.message_type === "call") {
+
+            }
+            // 视频电话
+            if(mes.message_type === "videocall") {
+
+            }
+            // 添加好友
+            if(mes.message_type === "addfrend") {
+
+            }
+            // 修改个人信息
+            if(mes.message_type === "changeinfo") {
+
+            }
+            // 获取用户信息
+            if(mes.message_type === "userinfo") {
+
             }
         })
 
         // 首次打开程序发送登陆请求
-        baseCommun.SendMessage(JSON.stringify(message))
+        $baseCommun.SendMessage(JSON.stringify(message))
     }
 }

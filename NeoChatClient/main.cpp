@@ -14,6 +14,10 @@ int main (int argc, char* argv[]) {
   QQmlApplicationEngine engine;
   QQmlContext* context = engine.rootContext();
   
+//  auto *basecom  = new BaseCommun();
+
+  //context->setContextProperty("baseCommun",basecom);
+
   qmlRegisterType<BaseCommun>("BaseCommun",1,0,"BaseCommunObject");
   
   app.setOrganizationName("NeoChat");

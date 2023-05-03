@@ -1,4 +1,3 @@
-
 function check_login_status(res,sig) {
     console.log(JSON.stringify(res))
     if(res.status === 200) {

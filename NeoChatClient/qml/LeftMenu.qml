@@ -8,7 +8,7 @@ Popup {
   background: Rectangle {
     color: "#17212B"
   }
-
+  DynamiOpenComponents {id: dyn}
   onVisibleChanged: {
     if(visible) {
       show_animation.start()
@@ -57,6 +57,7 @@ Popup {
         property int font_size: 17
         property int icon_height: 25
         property int icon_width: 25
+
         spacing: 10
         Leftmenubutton {
           width: parent.width
@@ -82,7 +83,10 @@ Popup {
           text: "联系人"
           icon: "qrc:/images/contact-book.png"
           onClicked: {
-            console.log("联系人")
+             var obj = dyn.openAddFriend(popup.parent)
+              if(obj !== undefined) {
+                  close()
+              }
           }
         }
         Leftmenubutton {

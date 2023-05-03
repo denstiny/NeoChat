@@ -49,8 +49,6 @@ void SendMessage (std::string message, int sock)  {
   }
   
   std::cout << "消息发送完毕" << std::endl;
-  // 响应完成之后关闭客户端
-  close (sock);
 }
 
 void ShowMessageHeader (Map header)  {

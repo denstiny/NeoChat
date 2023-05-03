@@ -28,14 +28,20 @@ const static std::unordered_map<Sex, std::string> SexValue {
 #define MESSAGE_VOICE "voice"
 #define MESSAGE_CALL "call"
 #define MESSAGE_VIDEOCALL "videocall"
+#define MESSAGE_ADDFREND "addfrend"
+#define MESSAGE_USERINFO "userinfo"
+#define MESSAGE_CHANGEINFO "changeinfo"
 
 enum class MessageType {
   login, // 登陆
+  addfrend, // 添加好友
   registered, // 注册
   text, // 文本
   voice, // 语音
   call, // 电话
   videocall, // 视频电话
+  userinfo, // 用户信息
+  changeinfo, // 修改用户信息
 };
 
 const static std::unordered_map<std::string, MessageType> MessageTypeValue {
@@ -44,9 +50,11 @@ const static std::unordered_map<std::string, MessageType> MessageTypeValue {
   {MESSAGE_TEXT, MessageType::text},
   {MESSAGE_VOICE, MessageType::voice},
   {MESSAGE_CALL, MessageType::call},
-  {MESSAGE_VIDEOCALL, MessageType::videocall}
+  {MESSAGE_VIDEOCALL, MessageType::videocall},
+  {MESSAGE_ADDFREND, MessageType::addfrend},
+  {MESSAGE_USERINFO, MessageType::userinfo},
+  {MESSAGE_CHANGEINFO, MessageType::changeinfo}
 };
-
 
 using Map = std::unordered_map<std::string, std::string>;
 Map parseMessageRequestHeaders (std::string header);

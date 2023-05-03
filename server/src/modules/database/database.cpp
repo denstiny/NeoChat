@@ -66,8 +66,10 @@ MYSQL_RES* DataSchema::Query (std::string  queryString)  {
               std::endl;
     return nullptr;
   }
-  
   resules = mysql_store_result (&conn);
+#ifdef NDEBUG
+  std::cout << "查询到" << CountQuery (resules) << "条数据" << std::endl;
+#endif
   return resules;
 }
 
@@ -75,4 +77,13 @@ MYSQL_RES* DataSchema::Query (std::string  queryString)  {
 int DataSchema::CountQuery (MYSQL_RES* res)  {
   if (res == nullptr) { return 0; }
   return mysql_num_rows (res);
+}
+
+// 检查查询是否有效查询到数据
+bool DataSchema::CheckQuery (std::string queryString)  {
+  MYSQL_RES* res = Query (queryString);
+  if (CountQuery (res) <= 0) {
+    return false;
+  }
+  return true;
 }
