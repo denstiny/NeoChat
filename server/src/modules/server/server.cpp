@@ -77,7 +77,7 @@ void Server::EventWith (int epoll_fd, int number, int listen_fd,
 }
 
 // 处理客户端发送的消息
-std::string  Server::ResultMessageString (int sock_fd)  {
+std::string Server::ResultMessageString (int sock_fd)  {
   char buf[BUFSIZ];
   std::string message;
   while (1) {
@@ -124,7 +124,7 @@ void Server::SmallMessageProcess (std::string response, int sock)  {
   switch (type) {
     case MessageType::login: { // 登陆
       std::cout << GREEN << "客户端请求登陆" << RESET << std::endl;
-      std::string message = ResultLoginString (body);
+      std::string message = ResultLoginString (body, sock);
       std::cout << GREEN << "---- show res message\n";
       std::cout << message << std::endl;
       std::cout  << "---- end res message" << RESET << std::endl;
@@ -164,13 +164,12 @@ void Server::SmallMessageProcess (std::string response, int sock)  {
     default: break;
   }
 }
-
 /**
    @brief 处理用户发送的登陆请求头，返回响应头字符串
    @param header
    @return
 */
-std::string Server::ResultLoginString (const nl_json body)  {
+std::string Server::ResultLoginString (const nl_json body, int socket)  {
   if (not body.contains ("user_account") or not body.contains ("user_password")) {
     std::cout << "缺少查询必要的属性" << std::endl;
     return RESULT_ERROR_MESSAGE;
@@ -184,6 +183,9 @@ std::string Server::ResultLoginString (const nl_json body)  {
                              
   if (dataSchema.CheckQuery (query_string)) {
     std::cout <<  "登陆成功"  << std::endl;
+    // 登陆成功保存客户端数据
+    User user (socket);
+    userMap.insert (std::make_pair (user_account, user));
     nl_json obj = {
       {"message_type", MESSAGE_LOGIN},
       {"status", true}

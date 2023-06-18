@@ -4,6 +4,8 @@ BaseCommun::BaseCommun(QObject *parent)
     : QObject{parent}
 {
     qDebug() << "创建通信核心";
+    m_time.setInterval(TIMEOUT); // 设置超时时间
+    m_time.setSingleShot(true); // 设为单次触发
 }
 
 /**
@@ -17,10 +19,16 @@ void BaseCommun::InitServer (QString ip, int port)  {
         return;
     }
     socket.connectToHost (ip, port);
+
+    connect(&m_time,&QTimer::timeout,[this,ip,port](){
+        socket.connectToHost (ip, port);
+    });
     connect (&socket, &QTcpSocket::connected, [this]() {
         emit is_connected (true);
     });
+
     connect (&socket, &QAbstractSocket::errorOccurred, [this]() {
+        m_time.start();
         emit is_connected (false);
     });
     connect (&socket, &QIODevice::readyRead, [this]() {

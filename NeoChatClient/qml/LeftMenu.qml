@@ -114,6 +114,10 @@ Popup {
           icon: "qrc:/images/settings.png"
           onClicked: {
             console.log("设置")
+              var obj = dyn.openSetting(popup.parent)
+              if(obj !== undefined) {
+                  close()
+              }
           }
         }
         Leftmenubutton {
@@ -127,6 +131,13 @@ Popup {
         }
       }
     }
+
+    Loader {
+        id: popupWidget
+        active: true
+        parent: popup.parent
+    }
+
     Rectangle {
       Layout.alignment: Qt.AlignBottom
       height: 100

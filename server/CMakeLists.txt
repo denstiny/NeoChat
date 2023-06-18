@@ -33,16 +33,16 @@ target_link_libraries(${BINNAME}
   )
 
 # # run test task
-# add_executable(test_mysql test/test_mysql.cpp ${source_src})
-# target_link_libraries(test_mysql mysqlclient)
-# add_test(NAME test_mysql COMMAND $<TARGET_FILE:test_mysql>)
-# add_custom_command(TARGET test_mysql POST_BUILD COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/build && ctest -R test_mysql --output-on-failure)
-# 
-# #run test thread pool
-# add_executable(test_thread_pool test/test_thread_pool.cpp ./src/modules/tasks/tasks.cpp ./src/modules/tasks/tasks.hpp)
-# add_test(NAME test_thread_pool COMMAND $<TARGET_FILE:test_thread_pool>)
-# add_custom_command(TARGET test_thread_pool POST_BUILD COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/build && ctest -R test_thread_pool --output-on-failure)
-# enable_testing()
-# add_definitions(-DCONFIGPATH="${CMAKE_CURRENT_SOURCE_DIR}/config/server")
-# 
-# add_executable(test_parser test/test_parseHeader.cpp ./src/modules/Message/MessageProcessor.hpp ./src/modules/Message/MessageProcessor.cpp)
+ # add_executable(test_mysql test/test_mysql.cpp ${source_src})
+ # target_link_libraries(test_mysql mysqlclient)
+ # add_test(NAME test_mysql COMMAND $<TARGET_FILE:test_mysql>)
+ # add_custom_command(TARGET test_mysql POST_BUILD COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/build && ctest -R test_mysql --output-on-failure)
+ # 
+ # #run test thread pool
+ # add_executable(test_thread_pool test/test_thread_pool.cpp ./src/modules/tasks/tasks.cpp ./src/modules/tasks/tasks.hpp)
+ # add_test(NAME test_thread_pool COMMAND $<TARGET_FILE:test_thread_pool>)
+ # add_custom_command(TARGET test_thread_pool POST_BUILD COMMAND cd ${CMAKE_CURRENT_SOURCE_DIR}/build && ctest -R test_thread_pool --output-on-failure)
+ # enable_testing()
+ # add_definitions(-DCONFIGPATH="${CMAKE_CURRENT_SOURCE_DIR}/config/server")
+ # 
+ # add_executable(test_parser test/test_parseHeader.cpp ./src/modules/Message/MessageProcessor.hpp ./src/modules/Message/MessageProcessor.cpp)

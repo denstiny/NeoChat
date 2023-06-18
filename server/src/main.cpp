@@ -30,7 +30,7 @@ int main (int argc, char* argv[]) {
   while (1) {
     // polling event poll tasks to thread pool
     int ret = epoll_wait (epoll_fd, events, MAX_EVENTS_NUMBER, -1);
-    if (ret < 0) {
+    if (ret < 0 and errno != EINTR) {
       perror ("epoll wait"); break;
     }
     pool.Submit ([&ser, ret, epoll_fd, &listen_fd, &events]() {

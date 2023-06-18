@@ -19,4 +19,7 @@
         <file>CreateGroup.qml</file>
         <file>CallHistory.qml</file>
     </qresource>
+    <qresource prefix="/qml/component">
+        <file>component/InputLine.qml</file>
+    </qresource>
 </RCC>

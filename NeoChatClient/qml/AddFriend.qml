@@ -4,6 +4,7 @@ import QtQuick.Controls 2.5
 
 Item {
     id: addfriend
+    signal AddFriendStatus
     z: 3
     anchors.fill: parent
     Rectangle {
@@ -65,6 +66,7 @@ Item {
             var obj = JSON.parse(message)
             if (obj.message_type === "addfrend" && obj.status === true) {
                 addfriend.destroy()
+                addfriend.AddFriendStatus()
             }
         })
     }

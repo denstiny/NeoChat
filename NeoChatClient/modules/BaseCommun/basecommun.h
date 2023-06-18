@@ -6,8 +6,9 @@
 #include <QDebug>
 #include <regex>
 #include <iostream>
+#include <QTimer>
 
-
+#define TIMEOUT 1000
 
 class BaseCommun : public QObject
 {
@@ -41,6 +42,7 @@ private:
     QTcpSocket socket;
     QString ip;
     int port;
+    QTimer m_time; // 心跳机制重连
     Q_PROPERTY(QString ip READ getIp WRITE setIp NOTIFY ipChanged)
     Q_PROPERTY(int port READ getPort WRITE setPort NOTIFY portChanged)
 };

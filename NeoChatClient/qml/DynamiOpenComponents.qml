@@ -13,7 +13,11 @@ Item {
         return openComponent("./AddFriend.qml",parent,{})
     }
 
-    function openRegister(parent) {
-        return openComponent("./register.qml",parent,{})
+    function openRegister(parent,opts) {
+        return openComponent("./LoginWindow.qml",parent,opts)
+    }
+
+    function openSetting(parent) {
+        return openComponent("./Setting.qml",parent,{})
     }
 }
