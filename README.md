@@ -1,5 +1,6 @@
 # NeoChat
 ## NeoChat Server 通信流程
+## 移除JSON通信方式,使用struct字节流通信
 > 启动流程
 1. 打开mysql 类连接mysql,等待数据库操作(modules: database)
 2. 初始化线程池，等待发布的任务去处理(modules: tasks)
