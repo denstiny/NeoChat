@@ -87,6 +87,7 @@ void ThreadPool::Init (int max_thread_num) {
   max_thread = max_thread_num;
   _init_ (max_thread_num);
 }
+
 void ThreadPool::Init() {
   _init_ (max_thread);
 }

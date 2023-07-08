@@ -14,15 +14,15 @@ int main (int argc, char* argv[]) {
   QQmlApplicationEngine engine;
   QQmlContext* context = engine.rootContext();
   
-//  auto *basecom  = new BaseCommun();
-
-  //context->setContextProperty("baseCommun",basecom);
-
-  qmlRegisterType<BaseCommun>("BaseCommun",1,0,"BaseCommunObject");
+  //  auto *basecom  = new BaseCommun();
   
-  app.setOrganizationName("NeoChat");
-  app.setOrganizationDomain("neochat.com");
-  app.setApplicationName("Neochat chat");
+  //context->setContextProperty("baseCommun",basecom);
+  
+  qmlRegisterType<BaseCommun> ("BaseCommun", 1, 0, "BaseCommunObject");
+  
+  app.setOrganizationName ("NeoChat");
+  app.setOrganizationDomain ("neochat.com");
+  app.setApplicationName ("Neochat chat");
   const QUrl url (u"qrc:/qml/Main.qml"_qs);
   QObject::connect (&engine, &QQmlApplicationEngine::objectCreationFailed,
   &app, []() { QCoreApplication::exit (-1); },

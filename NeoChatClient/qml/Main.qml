@@ -69,7 +69,6 @@ Window {
     Rectangle {
         // 网络状况
         id: network_state
-        property string m_state: "networkload"
         width: 30
         height: 30
         z: 3
@@ -114,11 +113,11 @@ Window {
                 duration: 1000
                 loops: Animation.Infinite
             }
-            state: network_state.m_state
+            state: "networkok"
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    console.log("网络状况")
+                    console.log("代理设置")
                 }
             }
             focus: true
@@ -139,7 +138,6 @@ Window {
         property int default_width: 320
         width: 0
     }
-
 
     function showLoginWidget(status) {
         var cmp = Qt.createComponent("./LoginWindow.qml",win)
@@ -167,10 +165,8 @@ Window {
         $baseCommun.is_connected.connect(function(status){
             if(status) {
                 console.log("连接服务器成功")
-                network_state.m_state = "networkok"
             }
             else{
-                network_state.m_state = "networkload"
                 console.log("连接服务器失败")
             }
         })

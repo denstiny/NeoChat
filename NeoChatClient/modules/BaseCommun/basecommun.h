@@ -10,41 +10,40 @@
 
 #define TIMEOUT 1000
 
-class BaseCommun : public QObject
-{
+class BaseCommun : public QObject {
     Q_OBJECT
-public:
-    explicit BaseCommun(QObject *parent = nullptr);
+  public:
+    explicit BaseCommun (QObject* parent = nullptr);
     ~BaseCommun();
     Q_INVOKABLE void InitServer (QString ip, int port);
     // send message to server
     Q_INVOKABLE void SendMessage (const QString& message);
     //Q_INVOKABLE void SendMessage (const QMap<QString, QString>& message);
     QString RecvMessage ();
-
+    
     QString getIp() const;
-    void setIp(const QString &newIp);
-
+    void setIp (const QString& newIp);
+    
     int getPort() const;
-    void setPort(const int &newPort);
-
-signals:
+    void setPort (const int& newPort);
+    
+  signals:
     void is_connected (bool status); // send connection status signal
     void newMessage (QString message); // server send message to client signal
     // send message to server error signal
     void SendMessageError (QString error_str);
-    void start(bool status);
-
+    void start (bool status);
+    
     void ipChanged();
     void portChanged();
-
-private:
+    
+  private:
     QTcpSocket socket;
     QString ip;
     int port;
     QTimer m_time; // 心跳机制重连
-    Q_PROPERTY(QString ip READ getIp WRITE setIp NOTIFY ipChanged)
-    Q_PROPERTY(int port READ getPort WRITE setPort NOTIFY portChanged)
+    Q_PROPERTY (QString ip READ getIp WRITE setIp NOTIFY ipChanged)
+    Q_PROPERTY (int port READ getPort WRITE setPort NOTIFY portChanged)
 };
 
 using Map = std::unordered_map<std::string, std::string>;

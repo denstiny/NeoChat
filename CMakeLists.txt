@@ -16,6 +16,6 @@ endif()
 
 add_subdirectory(3rdpackages/B-tree)
 add_subdirectory(3rdpackages/Json)
-# add_subdirectory(client)
+#add_subdirectory(client)
 add_subdirectory(server)
 add_subdirectory(NeoChatClient)
