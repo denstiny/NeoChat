@@ -1,6 +1,0 @@
-MessageId: 消息编号             # 编号 通过客户端本地生成,生成逻辑[设备名字，用户id,当前时间戳]
-Length: 消息长度
-TotalLength: 总长度
-
-
-{}                              # 消息内容(json)

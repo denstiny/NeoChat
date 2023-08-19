@@ -1,4 +1,0 @@
-/.cache/
-/build/**
-!/build/tasks.ini
-!/build/ChatClient
